@@ -41,13 +41,12 @@ object ClojurePlugin extends AutoPlugin {
 
       ClojureCompile.compile(classpath, sourceDirectory, stubDirectory, destinationDirectory)
     },
-    compile in Compile <<= (compile in Compile) map { x =>
-  // post-compile work
-  clojureCompile
-  x
+//     compile in Compile <<= (compile in Compile) map { x =>
+//   clojureCompile
+//   x
 }
     //compile in Compile := Def.sequential(compile in Compile, clojureCompile in Compile).value
-    //compile in Compile := ((compile in Compile) dependsOn(clojureCompile in Compile)).value
+    compile in Compile := ((compile in Compile) dependsOn(clojureCompile in Compile)).value
   )
 
 }
